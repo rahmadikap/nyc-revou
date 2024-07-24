@@ -1,0 +1,581 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Navbar Style */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #eef0f2;
+  overflow-x: hidden; /* Ensure no horizontal scroll */
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a2c55;
+  padding: 10px 20px;
+  z-index: 999;
+}
+
+.logo {
+  color: #eef0f2;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.menu {
+  display: flex;
+  margin-top: 5px;
+}
+
+.menu a {
+  color: #eef0f2;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-align: center;
+  padding: 18px 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.menu.active {
+  display: flex; /* Tampilkan menu saat aktif */
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: #1a2c55;
+  z-index: 1000; /* Pastikan menu terlihat di atas elemen lainnya */
+}
+
+.menu a:hover {
+  color: #ffb703;
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger-menu .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #eef0f2;
+  margin: 3px 0;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #1a2c55;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+  }
+
+  .menu a {
+    padding: 10px;
+    border-top: 1px solid #ffb703;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+.paralax {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#text {
+  position: absolute;
+  margin-top: 50px;
+  font-size: 4em;
+  color: #1a2c55;
+  text-shadow: 2px 2px 4px #b5b6b8;
+}
+
+.paralax img {
+  position: absolute;
+  top: 10;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+/* Navbar Style End */
+
+.home,
+.analyst,
+.glossary,
+.team,
+.contact {
+  padding: 100px 20px;
+}
+
+.analyst-content,
+.glossary-content,
+.team-content,
+.contact-content {
+  max-width: 1500px;
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  border-radius: 8px;
+}
+
+.analyst-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dataTables_wrapper {
+  width: 100%;
+  overflow-x: auto; /* Untuk scroll horizontal */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #1a2c55;
+  padding: 8px 12px;
+  text-align: left;
+  white-space: nowrap; /* Agar tidak terpotong */
+}
+
+th {
+  background-color: #1a2c55;
+  color: #eef0f2;
+}
+
+/* CSS untuk layar kecil */
+@media (max-width: 600px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+  thead tr {
+    display: none;
+  }
+  tr {
+    margin-bottom: 10px;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+  }
+  td::before {
+    content: attr(data-label);
+    flex: 1;
+    font-weight: bold;
+    padding-right: 10px;
+  }
+}
+
+/* General container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+.container h1, .container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Dropdown filter styles */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.dropbtn {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  z-index: 1;
+  border-radius: 4px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.stat-item:last-child {
+  margin-right: 0;
+}
+
+.charts-container {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
+}
+.chart-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.chart-container canvas {
+  margin-top: 10px;
+}
+
+.pie-chart-container canvas {
+  margin: 10px auto 0 auto; /* Center the pie chart horizontally */
+}
+
+@media (max-width: 768px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+}
+.dashboard {
+  width: 100%;
+}
+
+.dashboard h2,
+.glossary h2,
+.team h2,
+.contact h2 {
+  color: #1a2c55;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.glossary p,
+.contact p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+.glossary-content {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.glossary h2 {
+  text-align: center;
+}
+
+.glossary-item {
+  margin-bottom: 20px;
+}
+
+.glossary-item header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.glossary-item header:hover {
+  background-color: #e1e1e1;
+}
+
+.glossary-item header h3 {
+  margin: 0;
+}
+
+.glossary-item .content {
+  display: none;
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  border-top: none;
+}
+
+.glossary-item .content {
+  display: none;
+}
+
+.glossary-item .content.active {
+  display: block;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.team-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.team {
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.team-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 50px; /* Sesuaikan jika diperlukan */
+  text-align: center;
+}
+
+.team h2 {
+  width: 100%; /* Menentukan lebar penuh agar berada di atas gambar */
+  color: #1a2c55;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.card {
+  width: 200px;
+  margin: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s;
+  -webkit-transition: transform 0.3s;
+  -moz-transition: transform 0.3s;
+  -ms-transition: transform 0.3s;
+  -o-transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+.imgBx {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+.imgBx img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contentBx {
+  padding: 20px;
+}
+
+.contentBx h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.contentBx h3 {
+  font-size: 1rem;
+  color: #1a2c55;
+  margin: 10px 0;
+}
+
+.social-icons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  color: #1a2c55; /* Warna ikon default */
+  font-size: 2rem;
+}
+
+.social-icons a:hover {
+  color: #3f729b; /* Warna ikon saat hover */
+}
+
+.contact {
+  background: #eef0f2;
+}
+
+.containercontact {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.contactinfo,
+.contactform {
+  flex: 1;
+  padding: 20px;
+}
+
+.contactinfo .box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contactinfo .box .icon {
+  font-size: 2rem;
+  color: #1a2c55;
+  margin-right: 20px;
+}
+
+.contactinfo .box .text h3 {
+  font-size: 1.2rem;
+  color: #1a2c55;
+  margin-bottom: 5px;
+}
+
+.contactinfo .box .text p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.contactform h2 {
+  font-size: 1.5rem;
+  color: #1a2c55;
+  margin-bottom: 20px;
+}
+
+.contactform .inputbox {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.contactform .inputbox input,
+.contactform .inputbox textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  resize: none;
+}
+
+.contactform .inputbox span {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #666;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.contactform .inputbox input:focus ~ span,
+.contactform .inputbox textarea:focus ~ span,
+.contactform .inputbox input:valid ~ span,
+.contactform .inputbox textarea:valid ~ span {
+  top: -10px;
+  left: 10px;
+  color: #1a2c55;
+  font-size: 0.8rem;
+  background: #eef0f2;
+  padding: 0 5px;
+}
+
+.contactform .inputbox input[type='submit'] {
+  background: #1a2c55;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contactform .inputbox input[type='submit']:hover {
+  background: #008577;
+}

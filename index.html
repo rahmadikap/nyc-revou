@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NYC Data Set</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!--JS DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="#home"><img src="assets/logonyc.png" /></a>
+        </div>
+        <div class="hamburger-menu">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="menu">
+          <a href="#home">Home</a>
+          <a href="#analyst">Analyst</a>
+          <a href="#glossary">Glossary</a>
+          <a href="#team">Team</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="paralax" id="home">
+      <img src="assets/awankiri.png" id="awankiri" />
+      <img src="assets/awankanan.png" id="awankanan" />
+      <img src="assets/kotakiri.png" id="kotakiri" />
+      <img src="assets/kotakanan.png" id="kotakanan" />
+      <img src="assets/kotatengah.png" id="kotatengah" />
+      <h2 id="text">Jayapura 9 RevoU</h2>
+    </section>
+
+    <section class="analyst" id="analyst">
+      <div class="analyst-content">
+        <h2>Analyst</h2>
+        <table class="display" id="dataTable">
+          <thead>
+            <tr>
+              <th>BOROUGH</th>
+              <th>NEIGHBORHOOD</th>
+              <th>BUILDING CLASS CATEGORY</th>
+              <th>TAX CLASS AT PRESENT</th>
+              <th>BUILDING CLASS AT PRESENT</th>
+              <th>LAND SQUARE FEET</th>
+              <th>GROSS SQUARE FEET</th>
+              <th>YEAR BUILT</th>
+              <th>TAX CLASS AT TIME OF SALE</th>
+              <th>BUILDING CLASS AT TIME OF SALE</th>
+              <th>SALE PRICE</th>
+              <th>SALE DATE</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="dashboard">
+          <h2>NYC Property Sale - Jayapura</h2>
+          <div class="filter-container">
+            <div class="dropdown">
+              <button class="dropbtn">BOROUGH</button>
+              <div class="dropdown-content" id="boroughFilter"></div>
+            </div>
+
+            <div class="dropdown">
+              <button class="dropbtn">BUILDING CLASS CATEGORY</button>
+              <div class="dropdown-content" id="buildingClassFilter"></div>
+            </div>
+          </div>
+
+          <div class="stats-container">
+            <div class="stat-item">
+              <h3>Total Sales</h3>
+              <p id="totalPenjualan"></p>
+            </div>
+            <div class="stat-item">
+              <h3>Average Sales Price</h3>
+              <p id="rataRataHargaPenjualan"></p>
+            </div>
+            <div class="stat-item">
+              <h3>Average Building Area</h3>
+              <p id="rataRataLuasBangunan"></p>
+            </div>
+            <div class="stat-item">
+              <h3>Average Land Area</h3>
+              <p id="rataRataLuasTanah"></p>
+            </div>
+          </div>
+
+          <div class="charts-container">
+            <div class="chart-container">
+              <h3>Average Land Area and Building Area</h3>
+              <canvas id="lineAreaChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+              <h3>Land and building area in building type</h3>
+              <canvas id="horizontalBarChart"></canvas>
+            </div>
+
+            <div class="chart-container pie-chart-container">
+              <h3>Sales Distribution Borough</h3>
+              <canvas id="pieChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+              <h3>Monthly Sales Trends</h3>
+              <canvas id="monthlySalesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="glossary" id="glossary">
+      <div class="glossary-content">
+        <h2>Glossary of Terms for Property Sales Files</h2>
+        <p>Our website includes a glossary containing a list of variables that influence property sales, helping users better understand the information.</p>
+        <div class="glossary-item">
+          <header>
+            <h3>Borough</h3>
+          </header>
+          <div class="content">
+            <p>The name of the borough in which the property is located.<br />1. Manhattan<br />2. Bronx<br />3. Brooklyn<br />4. Queens<br />5. Staten Island.</p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Neighborhood</h3>
+          </header>
+          <div class="content">
+            <p>
+              Department of Finance assessors determine the neighborhood name in the course of valuing properties. The common name of the neighborhood is generally the same as the name Finance designates. However, there may be slight
+              differences in neighborhood boundary lines and some sub-neighborhoods may not be included.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Building Class Category</h3>
+          </header>
+          <div class="content">
+            <p>
+              This is a field that we are including so that users of the Rolling Sales Files can easily identify similar properties by broad usage (e.g. One Family Homes) without looking up individual Building Classes. Files are sorted by
+              Borough, Neighborhood, Building Class Category, Block and Lot.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Tax Class at Present</h3>
+          </header>
+          <div class="content">
+            <p>
+              Every property in the city is assigned to one of four tax classes (Classes 1, 2, 3, and 4), based on the use of the property. <br />
+
+              <br />Class 1: Includes most residential property of up to three units (such as one-, two-, and three-family homes and small stores or offices with one or two attached apartments), vacant land that is zoned for residential
+              use, and most condominiums that are not more than three stories. <br />Class 2: Includes all other property that is primarily residential, such as cooperatives and condominiums. <br />Class 3: Includes property with equipment
+              owned by a gas, telephone or electric company. <br />Class 4: Includes all other properties not included in class 1,2, and 3, such as offices, factories, warehouses, garage buildings, etc.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Building Class at Present</h3>
+          </header>
+          <div class="content">
+            <p>
+              The Building Classification is used to describe a property’s constructive use. The first position of the Building Class is a letter that is used to describe a general class of properties (for example “A” signifies one-family
+              homes, “O” signifies office buildings. “R” signifies condominiums). The second position, a number, adds more specific information about the property’s use or construction style (using our previous examples “A0” is a Cape Cod
+              style one family home, “O4” is a tower type office building and “R5” is a commercial condominium unit). The term Building Class used by the Department of Finance is interchangeable with the term Building Code used by the
+              Department of Buildings.<br /><a href="https://www1.nyc.gov/assets/finance/jump/hlpbldgcode.html">See NYC Building Classifications.</a>
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Block</h3>
+          </header>
+          <div class="content">
+            <p>
+              A Tax Block is a sub-division of the borough on which real properties are located. The Department of Finance uses a Borough-Block-Lot classification to label all real property in the City. “Whereas” addresses describe the
+              street location of a property, the block and lot distinguishes one unit of real property from another, such as the different condominiums in a single building. Also, block and lots are not subject to name changes based on
+              which side of the parcel the building puts its entrance on.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Land Square Feet</h3>
+          </header>
+          <div class="content">
+            <p>The land area of the property listed in square feet.</p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Gross Square Feet</h3>
+          </header>
+          <div class="content">
+            <p>The total area of all the floors of a building as measured from the exterior surfaces of the outside walls of the building, including the land area and space within any building or structure on the property.</p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Year Built</h3>
+          </header>
+          <div class="content">
+            <p>Year the structure on the property was built.</p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Tax Classs At Time of Sale</h3>
+          </header>
+          <div class="content">
+            <p>
+              New York City (NYC) property sales dataset that provides information on the tax classification applied to the property at the time of sale. This tax classification is important as it determines the tax rate applicable to the
+              property.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Building Class at Time of Sale</h3>
+          </header>
+          <div class="content">
+            <p>
+              The Building Classification is used to describe a property’s constructive use. The first position of the Building Class is a letter that is used to describe a general class of properties (for example “A” signifies one-family
+              homes, “O” signifies office buildings. “R” signifies condominiums). The second position, a number, adds more specific information about the property’s use or construction style (using our previous examples “A0” is a Cape Cod
+              style one family home, “O4” is a tower type office building and “R5” is a commercial condominium unit). The term Building Class as used by the Department of Finance is interchangeable with the term Building Code as used by the
+              Department of Buildings.
+            </p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Sales Price</h3>
+          </header>
+          <div class="content">
+            <p>Price paid for the property.</p>
+          </div>
+        </div>
+        <div class="glossary-item">
+          <header>
+            <h3>Sale Date</h3>
+          </header>
+          <div class="content">
+            <p>Date the property sold.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team" id="team">
+      <div class="team-content">
+        <h2>Our Team</h2>
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/grace.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Grace</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/graceeiiu/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/grace-ginting-248ab92a4"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Project Leader</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/nanda.jpeg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Ananda</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/anandaa.ms/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/ananda-maulana-saputra-9a96a9251/"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Front End</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/rapli - Copy.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Rafli</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/rafliaap/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/rafli-aditya-p-50695120b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Front End</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/alya.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Alya</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/alyalala66/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/alya-lala-14bb4a150"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Front End</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/rahma.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Rahma</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/rahmadikap?igsh=dzM1M2llY2E3OW11"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/rahmadika-putri-9954b12bb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Front End</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/aul.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Aulia</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/rzqauliaa/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="http://www.linkedin.com/in/rizqi-aulia"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Quality Assurance</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/Atep Ramdani.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Atep</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/armdn1204/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/atep-ramdani-8771152b2"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Quality Assurance</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/Yulina Putri.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Yulina</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/yln.ptri?igsh=ZDFhajlvNm5pa3Vk"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/yulina-putri-9b5825261"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Quality Assurance</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/afrizal.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Afrizal</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Deployment</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/dinda.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Dinda</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/dinda_linia/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/affifadilla-dinda-alinia-b18a63221/"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Pitch Desk</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/raul.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>Raul</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/124ul13?igsh=aXhxdjl3Y3dhajNk"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/raularistobasoeki"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Pitch Deck</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="imgBx">
+            <img src="team/april.jpg" alt="Team Member 1" />
+          </div>
+          <div class="contentBx">
+            <h2>April</h2>
+            <div class="social-icons" id="social-icons">
+              <a href="https://www.instagram.com/anithaa_12/"><i class="fa-brands fa-square-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/april-yonita-9908612a5"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="size">
+              <h3>Pitch Deck</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-content">
+        <h2>Contact Us</h2>
+        <div class="containercontact">
+          <div class="contactinfo">
+            <div class="box">
+              <div class="icon">📧</div>
+              <div class="text">
+                <h3>Email</h3>
+                <p>team9.jayapura@gmail.com</p>
+              </div>
+            </div>
+            <div class="box">
+              <div class="icon">📞</div>
+              <div class="text">
+                <h3>Phone Number</h3>
+                <p>+62 852-4925-4963 Project Leader</p>
+                <p>+62 851-5664-7225 Front End</p>
+                <p>+62 822-6418-1128 Front End</p>
+              </div>
+            </div>
+          </div>
+          <div class="contactform">
+            <form action="https://api.web3forms.com/submit" method="POST">
+              <h2>Send Message</h2>
+              <input type="hidden" name="access_key" value="7040ce67-a2d1-46fd-b6bc-1c6b7bad5912" />
+              <div class="inputbox">
+                <input type="text" name="name" required />
+                <span>Full Name</span>
+              </div>
+              <div class="inputbox">
+                <input type="email" name="Email" required />
+                <span>Email</span>
+              </div>
+              <div class="inputbox">
+                <textarea name="message" required></textarea>
+                <span>Message</span>
+              </div>
+              <div class="inputbox">
+                <input type="submit" value="Send" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js" type="module"></script>
+    <script src="chart.js" type="module"></script>
+  </body>
+</html>
